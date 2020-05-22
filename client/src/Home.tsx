@@ -7,7 +7,7 @@ import {
   Grid,
   Segment,
   Header,
-  Icon,
+  HeaderSubheader,
   Checkbox,
   Popup,
   Loader,
@@ -17,6 +17,7 @@ import {
 import { useHistory } from 'react-router-dom';
 import useAPI from './hooks/useAPI';
 import useQuery from './hooks/useQuery';
+import { AppColorToCSSColor, AppColor } from './config';
 
 function Home() {
   const query = useQuery();
@@ -35,7 +36,7 @@ function Home() {
     endpoint: `/game/create${playingOnThisDevice ? `?playerName=${createGamePlayerName}` : '?'}`,
     method: 'POST',
     skip: !shouldCreateGame || (playingOnThisDevice && (createGamePlayerName === null || createGamePlayerName === '')),
-    withReCAPTCHA: true,
+    withReCAPTCHA: false,
   });
   const [joinGameLoading, joinGameError, joinGameResult] = useAPI({
     endpoint: `/game/join?gameID=${joinGameID}&playerName=${joinGamePlayerName}`,
@@ -54,7 +55,7 @@ function Home() {
       <Container>
         <Message negative>
           <Message.Header>Something broke</Message.Header>
-          <p>Try refreshing the page</p>
+          <p>Try refreshing the page or asking Joe</p>
         </Message>
       </Container>
     );
@@ -66,7 +67,7 @@ function Home() {
       <Container>
         <Message negative>
           <Message.Header>Something broke</Message.Header>
-          <p>Try refreshing the page</p>
+          <p>Try refreshing the page or asking Joe</p>
         </Message>
       </Container>
     );
@@ -75,9 +76,8 @@ function Home() {
     <>
       <Container textAlign="center">
         <Header as="h2" icon inverted>
-          <Icon name="gamepad" />
-          OpenCodenames
-          <Header.Subheader>Play the board game Codenames online with friends.</Header.Subheader>
+          Codenames, Kinda?
+          <HeaderSubheader>I think it pretty much works now.</HeaderSubheader>
         </Header>
       </Container>
       <Container textAlign="justified">
@@ -87,10 +87,9 @@ function Home() {
             <Grid.Column>
               <Form>
                 <Form.Input
-                  icon="add user"
                   iconPosition="left"
-                  label="Enter a game ID"
-                  placeholder="FRXX..."
+                  label="Your code from Clara goes here:"
+                  placeholder="5 Letter Code"
                   value={joinGameID || ''}
                   onChange={(e) => {
                     if (e.target.value.length > 0 && gameIDFieldRequiredError) {
@@ -101,10 +100,9 @@ function Home() {
                   error={gameIDFieldRequiredError}
                 />
                 <Form.Input
-                  icon="add user"
                   iconPosition="left"
-                  label="Enter your name"
-                  placeholder="Morgana"
+                  label="Your name:"
+                  placeholder="Clara?"
                   value={joinGamePlayerName || ''}
                   onChange={(e) => {
                     if (e.target.value.length > 0 && joinGamePlayerNameFieldRequiredError) {
@@ -116,7 +114,8 @@ function Home() {
                 />
                 <Button
                   content="Join game"
-                  color="blue"
+                  color="black"
+                  style={{backgroundColor: AppColorToCSSColor[AppColor.Grey]}}
                   onClick={(_e) => {
                     const gameIDNotSet = joinGameID === null || joinGameID === '';
                     const playerNameNotSet = joinGamePlayerName === null || joinGamePlayerName === '';
@@ -143,10 +142,9 @@ function Home() {
                 <Grid.Column verticalAlign="middle">
                   <Form>
                     <Form.Input
-                      icon="add user"
                       iconPosition="left"
-                      label={<label style={{ textAlign: 'left' }}>Enter your name</label>}
-                      placeholder="Ryuji"
+                      label={<label style={{ textAlign: 'left' }}>Who Are You?</label>}
+                      placeholder="Joe"
                       value={createGamePlayerName || ''}
                       onChange={(e) => {
                         if (e.target.value.length > 0 && createGamePlayerNameFieldRequiredError) {
@@ -162,7 +160,7 @@ function Home() {
                       trigger={
                         <Checkbox
                           style={{ marginBottom: '15px' }}
-                          label="I'll be playing on this device"
+                          label="I'm playing on this screen"
                           checked={playingOnThisDevice}
                           onChange={(_e) => {
                             setPlayingOnThisDevice(!playingOnThisDevice);
@@ -173,9 +171,9 @@ function Home() {
                     />
                     <Button
                       content="New game"
-                      icon="add square"
-                      size="big"
-                      color="blue"
+                      size="medium"
+                      color="black"
+                      style={{backgroundColor: AppColorToCSSColor[AppColor.Grey]}}
                       onClick={() => {
                         if (playingOnThisDevice && (createGamePlayerName === null || createGamePlayerName === '')) {
                           setCreateGamePlayerNameFieldRequiredError(true);
@@ -187,11 +185,7 @@ function Home() {
                     <Dimmer active={createGameLoading}>
                       <Loader size="large">Loading</Loader>
                     </Dimmer>
-                    <div style={{ color: 'gray', fontSize: '7px', marginTop: '10px' }}>
-                      <p style={{ margin: '0' }}>This site is protected by reCAPTCHA and the Google</p>
-                      <a href="https://policies.google.com/privacy">Privacy Policy</a> and
-                      <a href="https://policies.google.com/terms"> Terms of Service</a> apply.
-                    </div>
+                    
                   </Form>
                 </Grid.Column>
               </>

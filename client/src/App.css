@@ -12,6 +12,29 @@
   pointer-events: none;
 }
 
+.toast-blue,
+.toast-red,
+.toast-green,
+.toast-yellow {
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  min-height: 55px !important;
+  color: white !important;
+}
+.toast-blue {
+  background-color: rgba(53, 130, 163, 0.8) !important;
+}
+.toast-red {
+  background-color: rgba(241, 96, 92, 0.8) !important;
+}
+.toast-green {
+  background-color: rgba(112, 193, 171, 0.8) !important;
+}
+.toast-yellow {
+  background-color: rgb(255, 195, 3, 0.8) !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

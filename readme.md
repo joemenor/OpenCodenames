@@ -1,23 +1,4 @@
-# OpenCodenames
 
-A real-time implementation of Codenames created with React/TypeScript and Golang.
-
-[You can play the game here!](https://www.chunkynut.com/#/)
-
-## Installation
-
-Stack:
-
-- [React](https://reactjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Go](https://golang.org/doc/install)
-- [Firestore](https://firebase.google.com/docs/firestore)
-
-Requirements:
-
-- [Yarn](https://classic.yarnpkg.com/en/)
-- [Go CLI](https://golang.org/doc/install)
-- [A Firestore database](https://firebase.google.com/docs/firestore)
 
 Prerequisites:
 

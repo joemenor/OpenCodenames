@@ -8,7 +8,6 @@ import (
 	"sync"
 )
 
-// WordList a slice of strings containing all possible words
 type WordList []string
 
 var (
@@ -18,7 +17,6 @@ var (
 	recaptchaKey     string
 )
 
-// GetWordList returns the word list
 func GetWordList() WordList {
 	wordListOnce.Do(func() {
 		file, err := os.Open("./data/wordlist.txt")

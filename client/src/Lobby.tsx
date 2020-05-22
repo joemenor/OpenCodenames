@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, Header, Icon, Divider, Card, Button, Segment, Select, Message } from 'semantic-ui-react';
+import { Container, Header, Divider, Card, Button, Segment, Select, Message } from 'semantic-ui-react';
+import { AppColorToCSSColor, AppColor } from './config';
 
 type LobbyProps = {
   game: Game;
@@ -65,20 +66,15 @@ function Lobby({ game, sendMessage }: LobbyProps) {
     <>
       <Container textAlign="center">
         <Header as="h2" icon inverted>
-          <Icon name="stopwatch" />
-          Lobby
-          <Header.Subheader>Waiting on players</Header.Subheader>
-        </Header>
-      </Container>
-      <Container textAlign="center">
-        <Header as="h3" inverted>
-          ID: {game.BaseGame.ID}
+          The Code Is: {game.BaseGame.ID}
         </Header>
       </Container>
       <Container textAlign="center" text>
         <div>
-          <Segment attached color="green">
-            Invite friends:
+          <Segment attached 
+          // color="green"
+          >
+            Invite:
             <br />
             <small>
               <a href={joinLink} target="_blank" rel="noopener noreferrer">
@@ -87,7 +83,7 @@ function Lobby({ game, sendMessage }: LobbyProps) {
             </small>
           </Segment>
           <Segment attached>
-            TV link:
+            Link To Just Watch:
             <br />
             <small>
               <a href={watchLink} target="_blank" rel="noopener noreferrer">
@@ -103,6 +99,7 @@ function Lobby({ game, sendMessage }: LobbyProps) {
                   setStartGameLoading(true);
                 }}
                 color="green"
+                style={{backgroundColor:AppColorToCSSColor[AppColor.Green]}}
                 disabled={!game.GameCanStart || updateTeamPlayer !== null || !allRolesFilled || startGameLoading}
                 loading={startGameLoading}
               >
@@ -112,8 +109,8 @@ function Lobby({ game, sendMessage }: LobbyProps) {
           )}
           {!allRolesFilled && (
             <Message color="yellow">
-              <Message.Header>Waiting for roles</Message.Header>
-              <p>There needs to be a Spy & Guesser on both teams</p>
+              <Message.Header>Waitin</Message.Header>
+              <p>Need a Spy & a Guesser on both teams</p>
             </Message>
           )}
         </div>
@@ -122,7 +119,9 @@ function Lobby({ game, sendMessage }: LobbyProps) {
         <Divider />
         <Card.Group centered>
           {game.BaseGame.Players.sort().map((playerName) => (
-            <Card color={game.BaseGame.TeamBlue.includes(playerName) ? 'blue' : 'red'} key={playerName}>
+            <Card color={game.BaseGame.TeamBlue.includes(playerName) ? 'blue' : 'red'} key={playerName}
+            style={{backgroundColor:game.BaseGame.TeamBlue.includes(playerName) ? AppColorToCSSColor[AppColor.Blue] : AppColorToCSSColor[AppColor.Red], boxShadow:'none'}}
+            >
               <Card.Content>
                 <Card.Description textAlign="center">
                   <Header as="h2" icon>

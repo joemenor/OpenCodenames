@@ -8,10 +8,10 @@ import (
 	"net/url"
 
 	"cloud.google.com/go/firestore"
-	"github.com/RobertDHanna/OpenCodenames/data"
+	// "github.com/RobertDHanna/OpenCodenames/data"
 	"github.com/RobertDHanna/OpenCodenames/db"
 	h "github.com/RobertDHanna/OpenCodenames/hub"
-	"github.com/RobertDHanna/OpenCodenames/recaptcha"
+	// "github.com/RobertDHanna/OpenCodenames/recaptcha"
 	"github.com/RobertDHanna/OpenCodenames/utils"
 	"github.com/gorilla/websocket"
 )
@@ -26,18 +26,18 @@ func CreateGameHandler(client *firestore.Client) utils.Handler {
 			return
 		}
 		playerName, playerNameErr := utils.GetQueryValue(&paramMap, "playerName")
-		recaptchaResponse, recaptchaErr := utils.GetQueryValue(&paramMap, "recaptcha")
-		if recaptchaResponse == "" || recaptchaErr != nil {
-			log.Println("A ReCAPTCHA token is required")
-			return
-		}
-		recaptcha.Init(data.GetReCAPTCHAKey())
-		response, err := recaptcha.Check(utils.GetIP(r), recaptchaResponse)
-		log.Println("ReCAPTCHA response: ", response)
-		if response.Score < 0.1 || err != nil {
-			log.Println("ReCAPTCHA request failed", err)
-			return
-		}
+		// recaptchaResponse, recaptchaErr := utils.GetQueryValue(&paramMap, "recaptcha")
+		// if recaptchaResponse == "" || recaptchaErr != nil {
+		// 	log.Println("A ReCAPTCHA token is required")
+		// 	return
+		// }
+		// recaptcha.Init(data.GetReCAPTCHAKey())
+		// response, err := recaptcha.Check(utils.GetIP(r), recaptchaResponse)
+		// log.Println("ReCAPTCHA response: ", response)
+		// if response.Score < 0.1 || err != nil {
+		// 	log.Println("ReCAPTCHA request failed", err)
+		// 	return
+		// }
 		playerMap := make(map[string]string)
 		teamRed := make(map[string]string)
 		teamBlue := make(map[string]string)

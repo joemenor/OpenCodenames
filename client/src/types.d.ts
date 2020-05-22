@@ -23,6 +23,7 @@ type BaseGame = {
   LastCardGuessedBy: string;
   LastCardGuessedCorrectly: boolean;
   Cards: { [x: string]: CardData };
+  clueWord: string;
 };
 
 type Game = {

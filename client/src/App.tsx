@@ -6,18 +6,19 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import Game from './Game';
 import { AppColor, AppColorToCSSColor } from './config';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 toast.configure();
-const autoClose = 3000;
+// const autoClose = 2000;
+const autoClose = false;
 const toaster: Toaster = {
-  blue: (message: string) => toast.info(message, { autoClose }),
-  red: (message: string) => toast.error(message, { autoClose }),
-  green: (message: string) => toast.success(message, { autoClose }),
-  yellow: (message: string) => toast.warn(message, { autoClose }),
+  blue: (message: string) => toast(message, { autoClose, position: toast.POSITION.TOP_RIGHT, closeButton: false, className: 'toast-blue' }),
+  red: (message: string) => toast(message, { autoClose, position: toast.POSITION.TOP_RIGHT, closeButton: false, className: 'toast-red'}),
+  green: (message: string) => toast(message, { autoClose, position: toast.POSITION.TOP_RIGHT, closeButton: false, className: 'toast-green' }),
+  yellow: (message: string) => toast(message, { autoClose, position: toast.POSITION.TOP_RIGHT, closeButton: false, className: 'toast-yellow' }),
 };
 function App() {
-  const [appColor, setAppColor] = React.useState<AppColor>(AppColor.Blue);
+  const [appColor, setAppColor] = React.useState<AppColor>(AppColor.Grey);
   return (
     <Router>
       <div className="App" style={{ backgroundColor: AppColorToCSSColor[appColor] }}>
@@ -29,7 +30,7 @@ function App() {
             <Home />
           </Route>
         </Switch>
-        <ToastContainer />
+        {/* <ToastContainer /> */}
       </div>
     </Router>
   );

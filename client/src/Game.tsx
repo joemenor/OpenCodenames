@@ -3,13 +3,15 @@ import Lobby from './Lobby';
 import Board from './Board';
 import useQuery from './hooks/useQuery';
 import useWebSocket from './hooks/useWebSocket';
-import { AppColor } from './config';
+import { AppColor, AppColorToCSSColor } from './config';
 import { Loader, Message, Container, Button } from 'semantic-ui-react';
 import { v4 as uuidv4 } from 'uuid';
 type GameProps = {
   appColor: AppColor;
   toaster: Toaster;
   setAppColor: (color: AppColor) => void;
+  // clueWord: string
+  // setClueWord: any
 };
 function Game({ setAppColor, appColor, toaster }: GameProps) {
   const query = useQuery();
@@ -46,7 +48,7 @@ function Game({ setAppColor, appColor, toaster }: GameProps) {
       <Container>
         <Message negative>
           <Message.Header>Invalid URL</Message.Header>
-          <p>Try rejoining or recreating the game.</p>
+          <p>Try rejoining or remaking?</p>
         </Message>
       </Container>
     );
@@ -76,8 +78,8 @@ function Game({ setAppColor, appColor, toaster }: GameProps) {
         return (
           <Container>
             <Message negative>
-              <Message.Header>Unknown game state</Message.Header>
-              <p>Please send the following to the developer:</p>
+              <Message.Header>Something is Broken.</Message.Header>
+              <p>Please send this to Joe:</p>
               <code style={{ wordWrap: 'break-word' }}>{JSON.stringify(game)}</code>
             </Message>
           </Container>
@@ -88,8 +90,10 @@ function Game({ setAppColor, appColor, toaster }: GameProps) {
   return (
     <>
       <Container style={{ marginBottom: '2px' }}>
-        <Button as="a" href="/#">
-          Home
+        <Button as="a" href="/#" icon="home" iconPosition="left" 
+        size="big"
+        style={{backgroundColor:'transparent',color:AppColorToCSSColor[AppColor.Grey]}}
+        >
         </Button>
       </Container>
       {getGameBody()}
