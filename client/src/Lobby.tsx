@@ -74,7 +74,7 @@ function Lobby({ game, sendMessage }: LobbyProps) {
           <Segment attached 
           // color="green"
           >
-            Invite:
+            Link:
             <br />
             <small>
               <a href={joinLink} target="_blank" rel="noopener noreferrer">
