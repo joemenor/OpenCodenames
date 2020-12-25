@@ -69,6 +69,7 @@ func CreateGameHandler(client *firestore.Client) utils.Handler {
 			LastCardGuessed:          "",
 			LastCardGuessedBy:        "",
 			LastCardGuessedCorrectly: false,
+			TimesPlayed:              0,
 		}
 		id := ""
 		for {
@@ -118,7 +119,7 @@ func JoinGameHandler(client *firestore.Client) utils.Handler {
 		}
 		err = db.AddPlayerToGame(ctx, client, gameID, playerID, playerName)
 		if err != nil {
-			if err.Error() == "playerAlreadyAdded" {
+			if err.Error() == "PlayerAlreadyAdded" {
 				fmt.Fprintf(w, `{"success":true,"playerID":"%s"}`, playerID)
 				return
 			}

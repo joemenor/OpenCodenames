@@ -89,6 +89,9 @@ func MapGameToBaseGame(game *db.Game) (*BaseGame, error) {
 			returnCard.BelongsTo = card.BelongsTo
 			returnCard.Guessed = true
 		}
+		if game.WhoseTurn == "over" {
+			returnCard.BelongsTo = card.BelongsTo
+		}
 		returnCards[word] = returnCard
 	}
 	baseGame := &BaseGame{
@@ -344,6 +347,7 @@ func HandleRestartGame(ctx context.Context, client *firestore.Client, game *db.G
 			"lastCardGuessed":          "",
 			"lastCardGuessedBy":        "",
 			"lastCardGuessedCorrectly": false,
+			"timesPlayed":              game.TimesPlayed + 1,
 		})
 	}
 }
